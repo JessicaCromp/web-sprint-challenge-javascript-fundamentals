@@ -48,34 +48,60 @@ const zooAnimals = [
   /* 🦁🦁🦁 Request 1: .forEach() 🦁🦁🦁
   The zoos want to display both the scientific name and the animal name in front of the habitats. Populate the displayNames array with only the animal_name and scientific_name of each animal. displayNames will be an array of strings, and each string should follow this pattern: "Name: Jackal, asiatic, Scientific: Canis aureus."
   */
-  function animalNames(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
+  // function animalNames(/*Your Code Here*/){
+  //   /*Your Code Here*/
+  // }
+  // zooAnimals.forEach(function(item){
+  //   console.log(item.animal_name);
+  //   console.log(item.scientific_name);
+  // });
+
+  const displayNames = [];
+  zooAnimals.forEach(function(item){
+    return displayNames.push(`${item.animal_name}, ${item.scientific_name}`);
+  });
+
+  console.log(displayNames);
   
 
   /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
   The zoos need a list of all their animal's names (animal_name only) converted to lower case. Using map, create a new array of strings named lowCaseAnimalNames, each string following this pattern: "jackal, asiatic". Log the resut.
   */
-  function lowerCaseNames(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
+  // function lowerCaseNames(/*Your Code Here*/){
+  //   /*Your Code Here*/
+  // }
+  const newNames = zooAnimals.map(function(item){
+    return item.animal_name.toLowerCase();
+  });
+
+  console.log(newNames);
+  
   
   
   /* 🦁🦁🦁 Request 3: .filter() 🦁🦁🦁
   The zoos are concerned about animals with a lower population count. Using filter, create a new array of objects called lowPopulationAnimals which contains only the animals with a population less than 5.
   */
-  function lowPopulationAnimals(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
-  
+  // function lowPopulationAnimals(/*Your Code Here*/){
+  //   /*Your Code Here*/
+  // }
+  let lowPopulationAnimals = zooAnimals.filter(function(item){
+    return item.population <= 5
+  })
+  console.log(lowPopulationAnimals);
 
   /* 🦁🦁🦁 Request 4: .reduce() 🦁🦁🦁
   The zoos need to know their total animal population across the United States. Find the total population from all the zoos using the .reduce() method. Remember the reduce method takes two arguments: a callback (which itself takes two args), and an initial value for the count.
   */
-  function USApop(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
+  // function USApop(/*Your Code Here*/){
+  //   /*Your Code Here*/ 
+  // }
+  const USApop = zooAnimals.reduce(function(accumulator,item){
+    console.log(`I am the accumulator ${accumulator}`);
+    console.log(`I am the current value ${item.population}`);
+    return accumulator + item.population;
+  },0);
   
+  console.log(`Total USA population is ${USApop}`);
   
   // 🦁🦁🦁 Callbacks 🦁🦁🦁  
   /* 🦁🦁🦁 Step 1: Create a higher-order function 🦁🦁🦁
@@ -84,20 +110,29 @@ const zooAnimals = [
     * The last parameter accepts a callback
     * The consume function should return the invocation of cb, passing a and b into cb as arguments
   */
-  function consume(/*Your Code Here */){
-    /*Your Code Here */
+  function consume(a, b, cb){
+    return cb(a, b);
   }
  
-  
   /* 🦁🦁🦁 Step 2: Create several functions to callback with consume(); 🦁🦁🦁 */
  // 🦁🦁🦁 Create a function named add that returns the sum of two numbers 🦁🦁🦁
-  function add(/*Your Code Here */){
-    /*Your Code Here*/
-  }
+ function calculate(num1, num2, consumeCb){ 
+  return consumeCb(num1, num2); 
+}
+const add = (num1, num2) => num1 + num2;
+  
+  console.log(calculate(4,6, add));
+
 // 🦁🦁🦁 Create a function named multiply that returns the product of two numbers 🦁🦁🦁
-  function multiply(/*Your Code Here */){
-   /*Your Code Here */
-  }
+  // function multiply(/*Your Code Here */){
+  //  /*Your Code Here */
+  // }
+  // function calculate(num1, num2, consumeCb){ 
+  //   return consumeCb(num1, num2); 
+  // }
+  const multiply = (num1, num2) => num1 * num2;
+    
+    console.log(calculate(4,6, multiply));
 
  // 🦁🦁🦁 Create a function named greeting that accepts a first and last name and returns "Hello first-name last-name, nice to meet you!" 🦁🦁🦁
   function greeting(/*Your Code Here */){
@@ -188,8 +223,8 @@ class CuboidMakerTwo{
   export default{
     foo,
     summation,
-    animalNames,
-    lowerCaseNames,
+    // animalNames,
+    // lowerCaseNames,
     lowPopulationAnimals,
     USApop,
     consume, 
